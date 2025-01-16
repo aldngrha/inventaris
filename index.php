@@ -2,7 +2,7 @@
 session_start();
 include 'koneksi.php';
 
-if (!isset($_SESSION["jabatan"])) {
+if (!isset($_SESSION["role_id"])) {
     echo "<script>location='login/index.php'</script>";
     exit();
 }
@@ -42,12 +42,13 @@ if (!isset($_SESSION["jabatan"])) {
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary h-100 py-2 bg-danger">
                                 <div class="card-body">
+                                    
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-white text-uppercase mb-1">
-                                                Data Jadwal</div>
+                                                Data Kategori</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray">
-                                                <?php $ambil = mysqli_query($koneksi, "SELECT * FROM tb_pasien"); ?>
+                                                <?php $ambil = mysqli_query($koneksi, "SELECT * FROM barang"); ?>
                                                 <?php $count = mysqli_num_rows($ambil); ?>
                                                 <?php echo $count; ?>
                                             </div>
@@ -67,9 +68,9 @@ if (!isset($_SESSION["jabatan"])) {
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-white text-uppercase mb-1">
-                                                Data Kelas</div>
+                                                Data Barang</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray">
-                                                <?php $ambil = mysqli_query($koneksi, "SELECT * FROM tb_obat"); ?>
+                                                <?php $ambil = mysqli_query($koneksi, "SELECT * FROM barang"); ?>
                                                 <?php $count = mysqli_num_rows($ambil); ?>
                                                 <?php echo $count; ?>
                                             </div>
@@ -88,10 +89,10 @@ if (!isset($_SESSION["jabatan"])) {
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-white text-uppercase mb-1">Mata Pelajaran
+                                            <div class="text-xs font-weight-bold text-white text-uppercase mb-1">Ruangan Asal
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray">
-                                                <?php $ambil = mysqli_query($koneksi, "SELECT * FROM tb_pendaftaran WHERE status = '0'"); ?>
+                                                <?php $ambil = mysqli_query($koneksi, "SELECT * FROM barang "); ?>
                                                 <?php $count = mysqli_num_rows($ambil); ?>
                                                 <?php echo $count; ?>
                                             </div>
@@ -111,9 +112,9 @@ if (!isset($_SESSION["jabatan"])) {
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-white text-uppercase mb-1">
-                                                Kategori</div>
+                                                Ruangan Tujuan</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray">
-                                                <?php $ambil = mysqli_query($koneksi, "SELECT * FROM tb_resep WHERE status_rsp = '0'"); ?>
+                                                <?php $ambil = mysqli_query($koneksi, "SELECT * FROM kategori "); ?>
                                                 <?php $count = mysqli_num_rows($ambil); ?>
                                                 <?php echo $count; ?>
                                             </div>
