@@ -2,7 +2,7 @@
 session_start();
 include 'koneksi.php';
 
-if (!isset($_SESSION["jabatan"])) {
+if (!isset($_SESSION["role_id"])) {
     echo "<script>location='login/index.php'</script>";
     exit();
 }
@@ -52,19 +52,19 @@ if (!isset($_SESSION["jabatan"])) {
                                             <th>No</th>
                                             <th>Username</th>
                                             <th>Password</th>
-                                            <th>Jabatan</th>
+                                            <th>Role</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $nomor = 1; ?>
-                                        <?php $ambil = $koneksi->query("SELECT * FROM tb_user"); ?>
-                                        <?php while ($pecah = $ambil->fetch_assoc()) { ?>
+                                        <?php $ambil = $koneksi->query("SELECT * FROM users"); ?>
+                                        <?php while ($user = $ambil->fetch_assoc()) { ?>
                                             <tr>
                                                 <td><?php echo $nomor; ?></td>
-                                                <td><?php echo $pecah['username']; ?></td>
-                                                <td><?php echo $pecah['password']; ?></td>
-                                                <td><?php echo ucfirst($pecah['jabatan']); ?></td>
+                                                <td><?php echo $user['username']; ?></td>
+                                                <td><?php echo $user['password']; ?></td>
+                                                <td><?php echo ucfirst($user['role']); ?></td>
                                                 <td>
                                                     <a href="user_hapus.php?&id_user=<?php echo $pecah['id_user']; ?>" class="btn-danger btn-sm btn">
                                                         <i class="fas fa-trash"></i>

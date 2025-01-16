@@ -2,7 +2,7 @@
 session_start();
 include '../../koneksi.php';
 
-if (!isset($_SESSION["jabatan"])) {
+if (!isset($_SESSION["role_id"])) {
     echo "<script>location='../../login/index.php'</script>";
     exit();
 }
@@ -18,29 +18,31 @@ if (!isset($_SESSION["jabatan"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Poli Klinik | Data Master - Dokter</title>
+    <title>Poli Klinik | Data Master - Obat</title>
     <link href="../../assets/css/styles.css" rel="stylesheet" />
     <link href="../../assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <script src="../../assets/js/all.min.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
-<?php include '../../includes/navbar.php'; ?>
+   <?php include '../../includes/navbar.php'; ?>
     <div id="layoutSidenav">
-        <?php include "../../includes/sidebar.php"; ?>
+        <div id="layoutSidenav_nav">
+        <?php include '../../includes/sidebar.php'; ?>
+        </div>
         <div id="layoutSidenav_content" class="bg-white text-dark">
             <main>
                 <div class="container-fluid">
-                    <h1 class="mt-4">Data Dokter</h1>
+                    <h1 class="mt-4">Data Kategori</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item"><a href="../../index.php" class="text-decoration-none">Dashboard</a></li>
                         <li class="breadcrumb-item active">Data Master</li>
-                        <li class="breadcrumb-item active">Data Dokter</li>
+                        <li class="breadcrumb-item active">Data Obat</li>
                     </ol>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table mr-1"></i>
-                            Tabel Data Dokter
+                            Tabel Data Obat
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -48,33 +50,29 @@ if (!isset($_SESSION["jabatan"])) {
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Kode Dokter</th>
-                                            <th>Dokter</th>
-                                            <th>Spesialis</th>
-                                            <th>Poli</th>
-                                            <th>Tarif</th>
+                                            <th>Id</th>
+                                            <th>Nama</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $nomor = 1; ?>
-                                        <?php $ambil = $koneksi->query("SELECT * FROM tb_dokter JOIN tb_poli ON tb_dokter.id_poli = tb_poli.id_poli"); ?>
-                                        <?php while ($pecah = $ambil->fetch_assoc()) { ?>
+                                        <?php $categories = $koneksi->query("SELECT * FROM kategori"); ?>
+                                        <?php while ($category = $categories->fetch_assoc()) { ?>
                                             <tr>
                                                 <td><?php echo $nomor; ?></td>
-                                                <td><?php echo $pecah['kd_dokter']; ?></td>
-                                                <td><?php echo $pecah['nm_dokter']; ?></td>
-                                                <td><?php echo $pecah['spesialis_dokter']; ?></td>
-                                                <td><?php echo $pecah['nm_poli']; ?></td>
-                                                <td>Rp. <?php echo number_format($pecah['tarif_dokter']); ?></td>
+                                                <td><?php echo $category['id_kategori']; ?></td>
+                                                <td><?php echo $category['nama']; ?></td>
+                                                  
+                                                </td>
                                                 <td>
-                                                    <a href="dokter_view.php?&id_dokter=<?php echo $pecah['id_dokter']; ?>" class="btn-primary btn-sm btn">
+                                                    <a href="/obat_view.php?&id_obat=<?php echo $category['id_kategori']; ?>" class="btn-primary btn-sm btn">
                                                         <i class="fas fa-eye"></i></i>
                                                     </a>
-                                                    <a href="dokter_ubah.php?&id_dokter=<?php echo $pecah['id_dokter']; ?>" class="btn-warning btn-sm btn">
+                                                    <a href="obat_ubah.php?&id_obat=<?php echo $pecah['id_obat']; ?>" class="btn-warning btn-sm btn">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a href="dokter_hapus.php?&id_dokter=<?php echo $pecah['id_dokter']; ?>" class="btn-danger btn-sm btn">
+                                                    <a href="obat_hapus.php?&id_obat=<?php echo $pecah['id_obat']; ?>" class="btn-danger btn-sm btn">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
@@ -86,7 +84,7 @@ if (!isset($_SESSION["jabatan"])) {
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="dokter_tambah.php" class="btn-success btn px-3 font-weight-bold"><i class="fas fa-plus "></i> Tambah Data Dokter</a>
+                            <a href="obat_tambah.php" class="btn-success btn px-3 font-weight-bold"><i class="fas fa-plus"></i> Tambah Data Kategori</a>
                         </div>
                     </div>
                 </div>

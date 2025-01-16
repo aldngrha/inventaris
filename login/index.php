@@ -50,41 +50,36 @@ include "../koneksi.php";
 							if (isset($_POST['submit'])) {
 								$user = $_POST['username'];
 								$pass = $_POST['password'];
+								$role = "";
 
-								$query = mysqli_query($koneksi, "SELECT * FROM tb_user WHERE username='$user' AND password='$pass'");
+								$query = mysqli_query($koneksi, "SELECT * FROM users WHERE username='$user' AND password='$pass'");
 								$masuk = mysqli_num_rows($query);
 								if ($masuk == 0) {
 									echo "<script>
-        								alert('Username atau password anda salah ')
+        								alert(' user tidak di temukan ')
           							</script>";
 								} else {
 									$masuk1 = mysqli_fetch_assoc($query);
-									if ($masuk1["jabatan"] == 'admin') {
-										$_SESSION["jabatan"] = 'admin';
+									if ($masuk1["role_id"] == '1') {
+										$_SESSION["role_id"] = 'admin';
 										$_SESSION["user"] = $user;
 										echo "<script>
           									alert('Anda berhasil Login!')
           										document.location='../index.php'
           								</script>";
-									} else if ($masuk1["jabatan"] == 'pembayaran') {
-										$_SESSION["jabatan"] = 'pembayaran';
+									} else if ($masuk1["role_id"] == '2') {
+										$_SESSION["role_id"] = 'petugas';
 										echo "<script>
 											alert('Anda berhasil Login!')
 												document.location='../index.php'
 										</script>";
-									} else if ($masuk1["jabatan"] == 'pendaftaran') {
-										$_SESSION["jabatan"] = 'pendaftaran';
+									} else if ($masuk1["role_id"] == '3') {
+										$_SESSION["role_id"] = 'guru';
 										echo "<script>
 											alert('Anda berhasil Login!')
 												document.location='../index.php'
 										</script>";
-									} else if ($masuk1["jabatan"] == 'pemeriksaan') {
-										$_SESSION["jabatan"] = 'pemeriksaan';
-										echo "<script>
-											alert('Anda berhasil Login!')
-												document.location='../index.php'
-										</script>";
-									}
+									} 
 								}
 							}
 							?>
