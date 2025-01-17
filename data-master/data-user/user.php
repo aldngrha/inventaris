@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'koneksi.php';
+include '../../koneksi.php';
 
 if (!isset($_SESSION["role_id"])) {
     echo "<script>location='login/index.php'</script>";
@@ -19,17 +19,17 @@ if (!isset($_SESSION["role_id"])) {
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Poli Klinik | Data User</title>
-    <link href="assets/css/styles.css" rel="stylesheet" />
-    <link href="assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-    <script src="assets/js/all.min.js"></script>
+    <link href="../../assets/css/styles.css" rel="stylesheet" />
+    <link href="../../assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <script src="../../assets/js/all.min.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
-<?php include 'includes/navbar.php'; ?>
+    <?php include '../../includes/navbar.php'; ?>
 
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-           <?php include 'includes/sidebar.php'; ?>
+            <?php include '../../includes/sidebar.php'; ?>
         </div>
         <div id="layoutSidenav_content" class="bg-white text-dark">
             <main>
@@ -52,7 +52,6 @@ if (!isset($_SESSION["role_id"])) {
                                             <th>No</th>
                                             <th>Username</th>
                                             <th>Password</th>
-                                            <th>Role</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -63,8 +62,7 @@ if (!isset($_SESSION["role_id"])) {
                                             <tr>
                                                 <td><?php echo $nomor; ?></td>
                                                 <td><?php echo $user['username']; ?></td>
-                                                <td><?php echo $user['password']; ?></td>
-                                                <td><?php echo ucfirst($user['role']); ?></td>
+                                                <td><?= md5($user['password']); ?></td>
                                                 <td>
                                                     <a href="user_hapus.php?&id_user=<?php echo $pecah['id_user']; ?>" class="btn-danger btn-sm btn">
                                                         <i class="fas fa-trash"></i>
@@ -83,7 +81,7 @@ if (!isset($_SESSION["role_id"])) {
                     </div>
                 </div>
             </main>
-            <?php include 'includes/footer.php'; ?>
+            <?php include '../../includes/footer.php'; ?>
         </div>
     </div>
     <script src="assets/js/jquery-3.5.1.slim.min.js"></script>
