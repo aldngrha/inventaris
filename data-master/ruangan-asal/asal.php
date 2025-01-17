@@ -72,7 +72,7 @@ if (!isset($_SESSION["role_id"])) {
                                                     <a href="obat_ubah.php?&id_obat=<?php echo $pecah['id_obat']; ?>" class="btn-warning btn-sm btn">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a href="obat_hapus.php?&id_obat=<?php echo $pecah['id_obat']; ?>" class="btn-danger btn-sm btn">
+                                                    <a href="/data-master/ruangan-asal/asal_hapus.php?&id_ruangan_asal=<?php echo $asal['id_ruangan_asal']; ?>" class="btn-danger btn-sm btn">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
@@ -84,7 +84,7 @@ if (!isset($_SESSION["role_id"])) {
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="obat_tambah.php" class="btn-success btn px-3 font-weight-bold"><i class="fas fa-plus"></i> Tambah Data </a>
+                            <a href="/data-master/ruangan-asal/asal_tambah.php" class="btn-success btn px-3 font-weight-bold"><i class="fas fa-plus"></i> Tambah Data </a>
                         </div>
                     </div>
                 </div>

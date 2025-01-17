@@ -2,17 +2,17 @@
 session_start();
 include '../../koneksi.php';
 
-if (!isset($_SESSION["jabatan"])) {
+if (!isset($_SESSION["role_id"])) {
     echo "<script>location='../../login/index.php'</script>";
     exit();
 }
 
-$ambil = $koneksi->query("SELECT * FROM tb_poli WHERE id_poli='$_GET[id_poli]'");
+$ambil = $koneksi->query("SELECT * FROM ruangan_tujuan WHERE id_ruangan='$_GET[id_ruangan]'");
 $pecah = $ambil->fetch_assoc();
 
-$koneksi->query("DELETE FROM tb_poli WHERE id_poli='$_GET[id_poli]'");
+$koneksi->query("DELETE FROM ruangan_tujuan WHERE id_ruangan='$_GET[id_ruangan]'");
 
-echo "<script>alert('Data Poli Terhapus!');</script>";
-echo "<script>location='poli.php'</script>";
+echo "<script>alert('Data Ruangan Terhapus!');</script>";
+echo "<script>location='/data-master/ruangan-tujuan/tujuan.php'</script>";
 
 ?>

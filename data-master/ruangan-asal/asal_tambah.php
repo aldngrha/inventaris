@@ -2,7 +2,7 @@
 session_start();
 include '../../koneksi.php';
 
-if (!isset($_SESSION["jabatan"])) {
+if (!isset($_SESSION["role_id"])) {
     echo "<script>location='../../login/index.php'</script>";
     exit();
 }
@@ -33,12 +33,12 @@ if (!isset($_SESSION["jabatan"])) {
         <div id="layoutSidenav_content" class="bg-white text-dark">
             <main>
                 <div class="container-fluid">
-                    <h1 class="mt-4">Tambah Data Obat</h1>
+                    <h1 class="mt-4">Tambah Data Ruangan Asal</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item"><a href="../../index.php" class="text-decoration-none">Dashboard</a></li>
                         <li class="breadcrumb-item active">Data Master</li>
-                        <li class="breadcrumb-item active">Data Obat</li>
-                        <li class="breadcrumb-item active">Tambah Data Obat</li>
+                        <li class="breadcrumb-item active">Data Ruangan Asal</li>
+                        <li class="breadcrumb-item active">Tambah Data Ruangan Asal</li>
                     </ol>
                     <div class="card mb-4">
                         <div class="card-header font-weight-bold">
@@ -48,26 +48,26 @@ if (!isset($_SESSION["jabatan"])) {
                             <div class="">
                                 <div class="form-group row">
                                     <div class="btn-block disabled mx-4">
-                                        <?php $ambil = mysqli_query($koneksi, "SELECT * FROM tb_obat ORDER BY id_obat DESC LIMIT 1"); ?>
+                                        <?php $ambil = mysqli_query($koneksi, "SELECT * FROM ruangan_asal ORDER BY id_ruangan_asal DESC LIMIT 1"); ?>
                                         <?php $data = $ambil->fetch_assoc(); ?>
                                         <label>Data Terakhir</label>
-                                        <input type="text" class="form-control text-center" value="<?php echo $data['kd_obat'] ?>" readonly>
+                                        <input type="text" class="form-control text-center" value="<?php echo $data['id_ruangan_asal'] ?>" readonly>
                                     </div>
                                 </div>
                                 <form class="ml-4" method="post" enctype="multipart/form-data">
                                     <div class="form-group row">
                                         <div class="col-sm-4">
-                                            <label>Kode Obat</label>
-                                            <input type="text" class="form-control" name="kd_obat" value="OBT-" required>
+                                            <label>ID Ruangan</label>
+                                            <input type="text" class="form-control" name="id_ruangan_asal" value="-" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-4">
-                                            <label>Nama Obat</label>
-                                            <input type="text" class="form-control" name="nm_obat" required>
+                                            <label>Nama Ruangan</label>
+                                            <input type="text" class="form-control" name="nama" value="R-" required>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <!-- <div class="form-group row">
                                         <div class="col-sm-4">
                                             <label>Jenis Obat</label>
                                             <select class="custom-select" name="jenis_obat">
@@ -101,7 +101,7 @@ if (!isset($_SESSION["jabatan"])) {
                                             <label>Expired Obat</label>
                                             <input type="date" class="form-control" name="exp_obat" required>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="form-group ">
                                         <button class="btn btn-success font-weight-bold px-3 mr-2" name="save"><i class="far fa-save"></i> Simpan</button>
                                         <a href="obat.php" class="btn btn-danger font-weight-bold px-3 mr-2"><i class="fas fa-arrow-circle-left"></i> Kembali</a>
@@ -110,14 +110,14 @@ if (!isset($_SESSION["jabatan"])) {
 
                                 <?php
                                 if (isset($_POST['save'])) {
-                                    if ($_POST['jenis_obat'] == 'obt') {
-                                        echo "<script>alert('Pilih Obat dengan Benar!');</script>";
+                                    if ($_POST['id_ruangan_asal'] == 0) {
+                                        echo "<script>alert('Pilih Ruangan dengan Benar!');</script>";
                                     } else {
-                                        $koneksi->query("INSERT INTO tb_obat (id_obat, kd_obat, nm_obat, jenis_obat, stok, harga_obat, exp_obat) 
-                                        VALUES ('', '$_POST[kd_obat]', '$_POST[nm_obat]', '$_POST[jenis_obat]', '$_POST[stok]', '$_POST[harga_obat]', '$_POST[exp_obat]')");
+                                        $koneksi->query("INSERT INTO ruangan_asal (nama) 
+                                        VALUES ('$_POST[nama]')");
 
-                                        echo "<script>alert('Data Tersimpan!');</script>";
-                                        echo "<script>location='obat.php'</script>";
+                                        echo "<script>alert('Data Ruangan Tersimpan!');</script>";
+                                        echo "<script>location='/data-master/ruangan-asal/asal.php'</script>";
                                     }
                                 }
 

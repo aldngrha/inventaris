@@ -31,16 +31,16 @@ if (!isset($_SESSION["role_id"])) {
         <div id="layoutSidenav_content" class="bg-white text-dark">
             <main>
                 <div class="container-fluid">
-                    <h1 class="mt-4">Data Dokter</h1>
+                    <h1 class="mt-4">Data Barang</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item"><a href="../../index.php" class="text-decoration-none">Dashboard</a></li>
                         <li class="breadcrumb-item active">Data Master</li>
-                        <li class="breadcrumb-item active">Data Dokter</li>
+                        <li class="breadcrumb-item active">Data Barang</li>
                     </ol>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table mr-1"></i>
-                            Tabel Data Dokter
+                            Tabel Data Barang
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -74,7 +74,7 @@ if (!isset($_SESSION["role_id"])) {
                                                     <a href="dokter_ubah.php?&id_dokter=<?php echo $pecah['id_dokter']; ?>" class="btn-warning btn-sm btn">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a href="dokter_hapus.php?&id_dokter=<?php echo $pecah['id_dokter']; ?>" class="btn-danger btn-sm btn">
+                                                    <a href="/data-master/data-barang/barang_hapus.php?&id_barang=<?php echo $barang['id_barang']; ?>" class="btn-danger btn-sm btn">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
@@ -86,7 +86,7 @@ if (!isset($_SESSION["role_id"])) {
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="dokter_tambah.php" class="btn-success btn px-3 font-weight-bold"><i class="fas fa-plus "></i> Tambah Data Barang</a>
+                            <a href="/data-master/data-barang/barang_tambah.php" class="btn-success btn px-3 font-weight-bold"><i class="fas fa-plus "></i> Tambah Data Barang</a>
                         </div>
                     </div>
                 </div>

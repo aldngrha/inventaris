@@ -47,7 +47,7 @@ if (!isset($_SESSION["role_id"])) {
                                     Tabel Data Transaksi
                                 </div>
                                 <div class="col-md-3">
-                                    <a href="pemeriksaan_tambah.php" class="btn-success btn px-3 font-weight-bold ml-5">
+                                    <a href="/transaksi-peminjaman/transaksi_tambah.php" class="btn-success btn px-3 font-weight-bold ml-5">
                                         <i class="fas fa-plus"></i> Tambah Data Transaksi
                                     </a>
                                 </div>

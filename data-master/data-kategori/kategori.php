@@ -37,12 +37,12 @@ if (!isset($_SESSION["role_id"])) {
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item"><a href="../../index.php" class="text-decoration-none">Dashboard</a></li>
                         <li class="breadcrumb-item active">Data Master</li>
-                        <li class="breadcrumb-item active">Data Obat</li>
+                        <li class="breadcrumb-item active">Data Kategori</li>
                     </ol>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table mr-1"></i>
-                            Tabel Data Obat
+                            Tabel Data Kategori
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -72,7 +72,7 @@ if (!isset($_SESSION["role_id"])) {
                                                     <a href="obat_ubah.php?&id_obat=<?php echo $pecah['id_obat']; ?>" class="btn-warning btn-sm btn">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a href="obat_hapus.php?&id_obat=<?php echo $pecah['id_obat']; ?>" class="btn-danger btn-sm btn">
+                                                    <a href="/data-master/data-kategori/kategori_hapus.php?id_kategori=<?php echo $category['id_kategori']; ?>" class="btn-danger btn-sm btn">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
@@ -84,7 +84,7 @@ if (!isset($_SESSION["role_id"])) {
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="obat_tambah.php" class="btn-success btn px-3 font-weight-bold"><i class="fas fa-plus"></i> Tambah Data Kategori</a>
+                            <a href="/data-master/data-kategori/kategori_tambah.php" class="btn-success btn px-3 font-weight-bold"><i class="fas fa-plus"></i> Tambah Data Kategori</a>
                         </div>
                     </div>
                 </div>
