@@ -1,9 +1,9 @@
 <?php
 session_start();
-include '../../koneksi.php';
+include '../koneksi.php';
 
 if (!isset($_SESSION["role_id"])) {
-    echo "<script>location='../../login/index.php'</script>";
+    echo "<script>location='../login/index.php'</script>";
     exit();
 }
 
@@ -25,74 +25,80 @@ if (!isset($_SESSION["role_id"])) {
 </head>
 
 <body class="sb-nav-fixed">
-<?php include '../../includes/navbar.php'; ?>
+<?php include '../includes/navbar.php'; ?>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-        <?php include '../../includes/sidebar.php'; ?>
+        <?php include '../includes/sidebar.php'; ?>
         </div>
         <div id="layoutSidenav_content" class="bg-white text-dark">
             <main>
                 <div class="container-fluid">
-                    <h1 class="mt-4">Tambah Data Barang</h1>
+                    <h1 class="mt-4">Tambah Data Transaksi</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item"><a href="../../index.php" class="text-decoration-none">Dashboard</a></li>
                         <li class="breadcrumb-item active">Data Master</li>
-                        <li class="breadcrumb-item active">Data Barang</li>
-                        <li class="breadcrumb-item active">Tambah Data Barang</li>
+                        <li class="breadcrumb-item active">Data Transaksi</li>
+                        <li class="breadcrumb-item active">Tambah Data Transaksi</li>
                     </ol>
                     <div class="card mb-4">
                         <div class="card-header font-weight-bold">
-                            Data Barang
+                            Data Transaksi
                         </div>
                         <div class="card-body">
                             <div class="">
                                 <div class="form-group row">
                                     <div class="btn-block disabled mx-4">
-                                        <?php $ambil = mysqli_query($koneksi, "SELECT * FROM barang ORDER BY id_barang DESC LIMIT 1"); ?>
+                                        <?php $ambil = mysqli_query($koneksi, "SELECT * FROM transaksi ORDER BY id_transaksi DESC LIMIT 1"); ?>
                                         <?php $data = $ambil->fetch_assoc(); ?>
                                         <label>Data Terakhir</label>
-                                        <input type="text" class="form-control text-center" value="<?php echo $data['id_barang'] ?>" readonly>
+                                        <input type="text" class="form-control text-center" value="<?php echo $data['id_transaksi'] ?>" readonly>
                                     </div>
                                 </div>
                                 <form class="ml-4" method="post" enctype="multipart/form-data">
                                     <div class="form-group row">
                                         <div class="col-sm-4">
-                                            <label>Kode Barang</label>
-                                            <input type="text" class="form-control" name="kode_barang" value="PRJ-" required>
+                                            <label>Tanggal Transaksi</label>
+                                            <input type="date" class="form-control" name="crated_at" value="" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-4">
+                                            <label>Nama User</label>
+                                            <input type="text" class="form-control" name="username" value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-4">
                                             <label>Nama Barang</label>
-                                            <input type="text" class="form-control" name="nama" value="" required>
+                                            <input type="text" class="form-control" name="nama_barang" required>
                                         </div>
                                     </div>
-                                    <!-- <div class="form-group row">
-                                        <div class="col-sm-4">
-                                            <label>Kategori</label>
-                                            <input type="text" class="form-control" name="spesialis_dokter" required>
-                                        </div>
-                                    </div> -->
                                     <div class="form-group row">
                                         <div class="col-sm-4">
-                                            <label>Kategori</label>
-                                            <select class="custom-select" name="id_kategori">
-                                                <option value="0" disabled selected>Pilih Kategori</option>
+                                            <label>Jumlah Barang</label>
+                                            <input type="text" class="form-control" name="jumlah" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-4">
+                                            <label>Ruangan Tujuan</label>
+                                            <input type="text" class="form-control" name="nama_ruangan_tujuan" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-4">
+                                            <label>Status Transaksi</label>
+                                            <select class="custom-select" name="id_transaksi">
+                                                <option value="0" disabled selected>Pilih Status</option>
                                                 <?php
-                                                $ambil2 = $koneksi->query("SELECT * FROM kategori");
+                                                $ambil2 = $koneksi->query("SELECT * FROM transaksi");
                                                 $pecah2 = $ambil2->fetch_assoc();
                                                 ?>
 
                                                 <?php foreach ($ambil2 as $poli) : ?>
-                                                    <option value="<?php echo $poli['id_kategori']; ?>"><?php echo $poli['nama']; ?></option>
+                                                    <option value="<?php echo $poli['id_transaksi']; ?>"><?php echo $poli['status']; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-4">
-                                            <label>Stok Barang</label>
-                                            <input type="text" class="form-control" name="stok" required>
                                         </div>
                                     </div>
                                     <div class="form-group ">
@@ -103,14 +109,14 @@ if (!isset($_SESSION["role_id"])) {
 
                                 <?php
                                 if (isset($_POST['save'])) {
-                                    if ($_POST['id_kategori'] == 0) {
-                                        echo "<script>alert('Kategori Belum Dipilih!');</script>";
+                                    if ($_POST['id_transaksi'] == 0) {
+                                        echo "<script>alert('Transaksi Belum Dipilih!');</script>";
                                     } else {
-                                        $koneksi->query("INSERT INTO barang (nama, stok, kode_barang, kategori_id)
-                                        VALUES ('$_POST[nama]', '$_POST[stok]', '$_POST[kode_barang]', '$_POST[id_kategori]')");
+                                        $koneksi->query("INSERT INTO transaksi (username, nama_barang, jumlah, nama_ruangan_tujuan)
+                                        VALUES ('$_POST[username]', '$_POST[nama_barang]', '$_POST[jumlah]', '$_POST[nama_ruangan_tujuan]')");
 
                                         echo "<script>alert('Data Berhasil Tersimpan!');</script>";
-                                        echo "<script>location='/data-master/data-barang/barang.php'</script>";
+                                        echo "<script>location='/transaksi-peminjaman/transaksi.php'</script>";
                                     }
                                 }
 
@@ -121,7 +127,7 @@ if (!isset($_SESSION["role_id"])) {
                     </div>
                 </div>
             </main>
-            <?php include '../../includes/footer.php'; ?>
+            <?php include '../includes/footer.php'; ?>
         </div>
     </div>
     <script src="../../assets/js/jquery-3.5.1.slim.min.js"></script>

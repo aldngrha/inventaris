@@ -84,7 +84,7 @@ if (!isset($_SESSION["role_id"])) {
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="obat_tambah.php" class="btn-success btn px-3 font-weight-bold"><i class="fas fa-plus"></i> Tambah Data Kategori</a>
+                            <a href="/data-master/ruangan-tujuan/tujuan_tambah.php" class="btn-success btn px-3 font-weight-bold"><i class="fas fa-plus"></i> Tambah Data Kategori</a>
                         </div>
                     </div>
                 </div>
