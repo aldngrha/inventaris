@@ -2,7 +2,7 @@
 session_start();
 include '../koneksi.php';
 
-if (!isset($_SESSION["jabatan"])) {
+if (!isset($_SESSION["role_id"])) {
     echo "<script>location='../login/index.php'</script>";
     exit();
 }
@@ -25,30 +25,30 @@ if (!isset($_SESSION["jabatan"])) {
 </head>
 
 <body class="sb-nav-fixed">
-<?php include '../includes/navbar.php'; ?>
+    <?php include '../includes/navbar.php'; ?>
 
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-        <?php include '../includes/sidebar.php'; ?>
+            <?php include '../includes/sidebar.php'; ?>
         </div>
         <div id="layoutSidenav_content" class="bg-white text-dark">
             <main>
                 <div class="container-fluid">
-                    <h1 class="mt-4">Data Pemeriksaan</h1>
+                    <h1 class="mt-4">Data Transaksi Peminjaman</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item"><a href="../index.php" class="text-decoration-none">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Data Pemeriksaan</li>
+                        <li class="breadcrumb-item active">Data Transaksi Peminjaman</li>
                     </ol>
                     <div class="card mb-4">
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-9">
                                     <i class="fas fa-table mr-1 mt-2"></i>
-                                    Tabel Data Pemeriksaan
+                                    Tabel Data Transaksi
                                 </div>
                                 <div class="col-md-3">
                                     <a href="pemeriksaan_tambah.php" class="btn-success btn px-3 font-weight-bold ml-5">
-                                        <i class="fas fa-plus"></i> Tambah Data Periksa
+                                        <i class="fas fa-plus"></i> Tambah Data Transaksi
                                     </a>
                                 </div>
                             </div>
@@ -58,32 +58,42 @@ if (!isset($_SESSION["jabatan"])) {
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Kode Pemeriksaan</th>
-                                            <th>Nama Pasien</th>
-                                            <th>Poli</th>
-                                            <th>Tanggal Periksa</th>
+                                            <th>Id Transaksi</th>
+                                            <th>Tanggal</th>
+                                            <th>Nama User</th>         
+                                            <th>Nama Barang</th>
+                                            <th>Jumlah Barang</th>
+                                            <th>Ruangan Asal</th>
+                                            <th>Ruangan Tujuan</th>
                                             <th>Aksi</th>
                                             <th>Status</th>
+                                           
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $ambil = $koneksi->query("SELECT * FROM tb_pemeriksaan a
-                                            JOIN tb_pendaftaran b ON a.id_pendaftaran = b.id_pendaftaran
-                                            JOIN tb_pasien c ON b.id_pasien = c.id_pasien
-                                            JOIN tb_poli d ON b.id_poli = d.id_poli"); ?>
-                                        <?php while ($pecah = $ambil->fetch_assoc()) { ?>
+                                        <?php $ambil = $koneksi->query("SELECT transaksi.status, transaksi.jumlah, transaksi.id_transaksi,
+                                            users.username, ruangan_asal.nama AS nama_ruangan_asal, ruangan_tujuan.nama
+                                            AS nama_ruangan_tujuan, barang.nama AS nama_barang, transaksi.created_at FROM transaksi
+                                            LEFT JOIN users ON transaksi.user_id = users.id_users
+                                            LEFT JOIN ruangan_asal ON transaksi.ruangan_asal_id = ruangan_asal.id_ruangan_asal
+                                            LEFT JOIN ruangan_tujuan ON transaksi.ruangan_tujuan_id = ruangan_tujuan.id_ruangan
+                                            LEFT JOIN barang ON transaksi.barang_id = barang.id_barang"); ?>
+                                        <?php while ($transaksi = $ambil->fetch_assoc()) { ?>
                                             <tr>
-                                                <td><?php echo $pecah['kd_pemeriksaan']; ?></td>
-                                                <td><?php echo $pecah['nm_pasien']; ?></td>
-                                                <td><?php echo $pecah['nm_poli']; ?></td>
-                                                <td><?php echo $pecah['tgl_pemeriksaan']; ?></td>
+                                                <td><?php echo $transaksi['id_transaksi']; ?></td>
+                                                <td><?php echo $transaksi['created_at']; ?></td>
+                                                <td><?php echo $transaksi['username']; ?></td>
+                                                <td><?php echo $transaksi['nama_barang']; ?></td>      
+                                                <td><?php echo $transaksi['jumlah']; ?></td>
+                                                <td><?php echo $transaksi['nama_ruangan_asal']; ?></td>
+                                                <td><?php echo $transaksi['nama_ruangan_tujuan']; ?></td>
                                                 <td>
-                                                    <?php if ($pecah['status_periksa'] == 0) { ?>
-                                                        <a href="pemeriksaan_view.php?&id_pemeriksaan=<?php echo $pecah['id_pemeriksaan']; ?>" class="btn-primary btn-sm btn">
+                                                    <?php if ($transaksi['status'] == "gagal") { ?>
+                                                        <a href="pemeriksaan_view.php?&id_transaksi=<?php echo $transaksi['id_transaksi']; ?>" class="btn-primary btn-sm btn">
                                                             <i class="fas fa-eye"></i></i>
                                                         </a>
-                                                    <?php } elseif ($pecah['status_periksa'] == 1) { ?>
-                                                        <a href="pemeriksaan_view.php?&id_pemeriksaan=<?php echo $pecah['id_pemeriksaan']; ?>" class="btn-primary btn-sm btn">
+                                                    <?php } elseif ($transaksi['status'] == "selesai") { ?>
+                                                        <a href="pemeriksaan_view.php?&id_transaksi=<?php echo $transaksi['id_transaksi']; ?>" class="btn-primary btn-sm btn">
                                                             <i class="fas fa-eye"></i></i>
                                                         </a>
                                                     <?php } else { ?>
@@ -93,10 +103,10 @@ if (!isset($_SESSION["jabatan"])) {
                                                     <?php } ?>
                                                 </td>
                                                 <td>
-                                                    <?php if ($pecah['status_periksa'] == 0) { ?>
-                                                        <span class="badge badge-danger p-2">Belum Menerima Resep</span>
-                                                    <?php } elseif ($pecah['status_periksa'] == 1) { ?>
-                                                        <span class="badge badge-success p-2">Sudah Menerima Resep</span>
+                                                    <?php if ($transaksi['status'] == "gagal") { ?>
+                                                        <span class="badge badge-danger p-2">Gagal</span>
+                                                    <?php } elseif ($transaksi['status'] == "selesai") { ?>
+                                                        <span class="badge badge-success p-2">Selesai</span>
                                                     <?php } else { ?>
                                                         <span class="badge badge-danger p-2">
                                                             <i class="fas fa-minus"></i>
