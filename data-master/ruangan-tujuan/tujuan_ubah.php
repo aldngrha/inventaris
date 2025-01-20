@@ -7,7 +7,7 @@ if (!isset($_SESSION["role_id"])) {
     exit();
 }
 
-$ambil = $koneksi->query("SELECT * FROM kategori WHERE id_kategori='$_GET[id_kategori]'");
+$ambil = $koneksi->query("SELECT * FROM ruangan_tujuan WHERE id_ruangan='$_GET[id_ruangan]'");
 $pecah = $ambil->fetch_assoc();
 
 ?>
@@ -36,16 +36,16 @@ $pecah = $ambil->fetch_assoc();
         <div id="layoutSidenav_content" class="bg-white text-dark">
             <main>
                 <div class="container-fluid">
-                    <h1 class="mt-4">Informasi Kategori</h1>
+                    <h1 class="mt-4">Ubah Data Ruangan</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item"><a href="../../index.php" class="text-decoration-none">Dashboard</a></li>
                         <li class="breadcrumb-item active">Data Master</li>
-                        <li class="breadcrumb-item active">Data Kategori</li>
-                        <li class="breadcrumb-item active">Info Kategori</li>
+                        <li class="breadcrumb-item active">Data Ruangan Tujuan</li>
+                        <li class="breadcrumb-item active">Ubah Data Ruangan</li>
                     </ol>
                     <div class="card mb-4">
                         <div class="card-header font-weight-bold">
-                            Data Kategori : <?php echo $pecah['nama']; ?>
+                            Data Ruangan : <?php echo $pecah['nama']; ?>
                         </div>
                         <div class="card-body">
                             <div class="">
@@ -53,58 +53,65 @@ $pecah = $ambil->fetch_assoc();
                                     <div class="form-group row">
                                         <div class="col-sm-4">
                                             <label>ID</label>
-                                            <input type="text" class="form-control" name="id_kategori" value="<?php echo $pecah['id_kategori']; ?>" readonly>
+                                            <input type="text" class="form-control" name="id_ruangan" value="<?php echo $pecah['id_ruangan']; ?>" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-4">
-                                            <label>Nama Kategori</label>
+                                            <label>Nama Ruangan</label>
                                             <input type="text" class="form-control" name="nama" value="<?php echo $pecah['nama']; ?>">
                                         </div>
                                     </div>
                                     <!-- <div class="form-group row">
                                         <div class="col-sm-4">
                                             <label>Nama Obat</label>
-                                            <input type="text" class="form-control" name="nm_obat" value="<?php echo $pecah['nm_obat']; ?>" readonly>
+                                            <input type="text" class="form-control" name="nm_obat" value="<?php echo $pecah['nm_obat']; ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-4">
                                             <label>Jenis Obat</label>
-                                            <input type="text" class="form-control" name="jenis_obat" value="<?php echo $pecah['jenis_obat']; ?>" readonly>
+                                            <select class="custom-select" name="jenis_obat">
+                                                <option value="<?php echo $pecah['jenis_obat']; ?>"><?php echo $pecah['jenis_obat']; ?></option>
+                                                <option value="Pil">Pil</option>
+                                                <option value="Tablet">Tablet</option>
+                                                <option value="Sirup">Sirup</option>
+                                                <option value="Salep">Salep</option>
+                                                <option value="Kaplet">Kaplet</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-4">
                                             <label>Stok Obat</label>
-                                            <input type="text" class="form-control" name="stok" value="<?php echo $pecah['stok']; ?>" readonly>
+                                            <input type="text" class="form-control" name="stok" value="<?php echo $pecah['stok']; ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-4">
                                             <label>Harga</label>
-                                            <input type="text" class="form-control" name="harga_obat" value="<?php echo $pecah['harga_obat']; ?>" readonly>
+                                            <input type="text" class="form-control" name="harga_obat" value="<?php echo $pecah['harga_obat']; ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-4">
                                             <label>Expired Obat</label>
-                                            <input type="date" class="form-control" name="exp_obat" value="<?php echo $pecah['exp_obat']; ?>" readonly>
+                                            <input type="date" class="form-control" name="exp_obat" value="<?php echo $pecah['exp_obat']; ?>" required>
                                         </div>
                                     </div> -->
                                     <div class="form-group ">
-                                        <a href="/data-master/data-kategori/kategori_ubah.php?&id_kategori=<?php echo $pecah['id_kategori']; ?>" class="btn-warning btn font-weight-bold px-3 mr-2 text-white"><i class="fas fa-edit"></i> Edit</a>
-                                        <a href="/data-master/data-kategori/kategori.php" class="btn btn-danger font-weight-bold px-3 mr-2"><i class="fas fa-arrow-circle-left"></i> Kembali</a>
+                                        <button class="btn btn-success font-weight-bold px-3 mr-2" name="ubah"><i class="fas fa-save"></i> Simpan</button>
+                                        <a href="/data-master/ruangan-tujuan/tujuan.php" class="btn btn-danger font-weight-bold px-3 mr-2"><i class="fas fa-arrow-circle-left"></i> Kembali</a>
                                     </div>
                                 </form>
 
                                 <?php
                                 if (isset($_POST['ubah'])) {
-                                    $koneksi->query("UPDATE kategori SET nama='$_POST[nama]'
-                                    WHERE id_kategori='$_GET[id_kategori]'");
+                                    $koneksi->query("UPDATE ruangan_tujuan SET nama='$_POST[nama]'
+                                    WHERE id_ruangan='$_GET[id_ruangan]'");
 
-                                    echo "<script>alert('Data Obat Telah Diubah!');</script>";
-                                    echo "<script>location='/data-master/data-kategori/kategori.php'</script>";
+                                    echo "<script>alert('Data Ruangan Telah Diubah!');</script>";
+                                    echo "<script>location='/data-master/ruangan-tujuan/tujuan.php'</script>";
                                 }
                                 ?>
 

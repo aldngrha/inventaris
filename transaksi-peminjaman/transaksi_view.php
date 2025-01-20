@@ -2,12 +2,12 @@
 session_start();
 include '../koneksi.php';
 
-if (!isset($_SESSION["jabatan"])) {
+if (!isset($_SESSION["role_id"])) {
     echo "<script>location='../login/index.php'</script>";
     exit();
 }
 
-$ambil = $koneksi->query("SELECT * FROM tb_pemeriksaan a JOIN tb_pendaftaran b ON a.id_pendaftaran = b.id_pendaftaran
+$ambil = $koneksi->query("SELECT * FROM transaksi a JOIN tb_pendaftaran b ON a.id_pendaftaran = b.id_pendaftaran
             JOIN tb_pasien c ON b.id_pasien = c.id_pasien
             JOIN tb_poli d ON b.id_poli = d.id_poli
             JOIN tb_dokter e ON b.id_dokter = e.id_dokter WHERE id_pemeriksaan='$_GET[id_pemeriksaan]'");
