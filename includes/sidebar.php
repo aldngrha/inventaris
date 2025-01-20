@@ -2,7 +2,7 @@
     <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
             <div class="nav">
-                <div class="sb-sidenav-menu-heading">Poli Klinik</div>
+                <div class="sb-sidenav-menu-heading">Inventaris</div>
                 <a class="nav-link active" href="/index.php">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Dashboard
@@ -42,7 +42,7 @@
                         Data Pasien
                     </a>
                 <?php elseif ($_SESSION["role_id"] == 'admin') : ?>
-                    <a class="nav-link" href="/data-pemeriksaan/pemeriksaan.php">
+                    <a class="nav-link" href="/transaksi-peminjaman/transaksi.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
                         Data Transaksi
                     </a>

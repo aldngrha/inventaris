@@ -66,13 +66,13 @@ if (!isset($_SESSION["role_id"])) {
                                                   
                                                 </td>
                                                 <td>
-                                                    <a href="/obat_view.php?&id_obat=<?php echo $category['id_kategori']; ?>" class="btn-primary btn-sm btn">
+                                                    <a href="/data-master/ruangan-tujuan/tujuan_view.php?&id_ruangan=<?php  echo $tujuan['id_ruangan']; ?>" class="btn-primary btn-sm btn">
                                                         <i class="fas fa-eye"></i></i>
                                                     </a>
-                                                    <a href="obat_ubah.php?&id_obat=<?php echo $pecah['id_obat']; ?>" class="btn-warning btn-sm btn">
+                                                    <a href="/data-master/ruangan-tujuan/tujuan_ubah.php?&id_ruangan=<?php  echo $tujuan['id_ruangan']; ?>" class="btn-warning btn-sm btn">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a href="obat_hapus.php?&id_obat=<?php echo $pecah['id_obat']; ?>" class="btn-danger btn-sm btn">
+                                                    <a href="/data-master/ruangan-tujuan/tujuan_hapus.php?&id_ruangan=<?php echo $tujuan['id_ruangan']; ?>" class="btn-danger btn-sm btn">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>

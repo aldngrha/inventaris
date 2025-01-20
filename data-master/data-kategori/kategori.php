@@ -51,7 +51,7 @@ if (!isset($_SESSION["role_id"])) {
                                         <tr>
                                             <th>No</th>
                                             <th>Id</th>
-                                            <th>Nama</th>
+                                            <th>Nama Kategori</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -66,10 +66,10 @@ if (!isset($_SESSION["role_id"])) {
                                                   
                                                 </td>
                                                 <td>
-                                                    <a href="/obat_view.php?&id_obat=<?php echo $category['id_kategori']; ?>" class="btn-primary btn-sm btn">
+                                                    <a href="/data-master/data-kategori/kategori_view.php?id_kategori=<?php echo $category['id_kategori']; ?>" class="btn-primary btn-sm btn">
                                                         <i class="fas fa-eye"></i></i>
                                                     </a>
-                                                    <a href="obat_ubah.php?&id_obat=<?php echo $pecah['id_obat']; ?>" class="btn-warning btn-sm btn">
+                                                    <a href="/data-master/data-kategori/kategori_ubah.php?id_kategori=<?php echo $category['id_kategori']; ?>" class="btn-warning btn-sm btn">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <a href="/data-master/data-kategori/kategori_hapus.php?id_kategori=<?php echo $category['id_kategori']; ?>" class="btn-danger btn-sm btn">

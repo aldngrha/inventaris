@@ -66,10 +66,10 @@ if (!isset($_SESSION["role_id"])) {
                                                   
                                                 </td>
                                                 <td>
-                                                    <a href="/obat_view.php?&id_obat=<?php echo $category['id_ruangan_asal']; ?>" class="btn-primary btn-sm btn">
+                                                    <a href="/data-master/ruangan-asal/asal_view.php?&id_ruangan_asal=<?php echo $asal['id_ruangan_asal']; ?>" class="btn-primary btn-sm btn">
                                                         <i class="fas fa-eye"></i></i>
                                                     </a>
-                                                    <a href="obat_ubah.php?&id_obat=<?php echo $pecah['id_obat']; ?>" class="btn-warning btn-sm btn">
+                                                    <a href="/data-master/ruangan-asal/asal_ubah.php?&id_ruangan_asal=<?php echo $asal['id_ruangan_asal']; ?>" class="btn-warning btn-sm btn">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <a href="/data-master/ruangan-asal/asal_hapus.php?&id_ruangan_asal=<?php echo $asal['id_ruangan_asal']; ?>" class="btn-danger btn-sm btn">

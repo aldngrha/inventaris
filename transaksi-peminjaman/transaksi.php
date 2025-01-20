@@ -89,11 +89,11 @@ if (!isset($_SESSION["role_id"])) {
                                                 <td><?php echo $transaksi['nama_ruangan_tujuan']; ?></td>
                                                 <td>
                                                     <?php if ($transaksi['status'] == "gagal") { ?>
-                                                        <a href="pemeriksaan_view.php?&id_transaksi=<?php echo $transaksi['id_transaksi']; ?>" class="btn-primary btn-sm btn">
+                                                        <!-- <a href="/transaksi-peminjaman/transaksi_view.php?&id_transaksi=<?php echo $transaksi['id_transaksi']; ?>" class="btn-primary btn-sm btn">
                                                             <i class="fas fa-eye"></i></i>
-                                                        </a>
+                                                        </a> -->
                                                     <?php } elseif ($transaksi['status'] == "selesai") { ?>
-                                                        <a href="pemeriksaan_view.php?&id_transaksi=<?php echo $transaksi['id_transaksi']; ?>" class="btn-primary btn-sm btn">
+                                                        <a href="/transaksi-peminjaman/transaksi_view.php?&id_transaksi=<?php echo $transaksi['id_transaksi']; ?>" class="btn-primary btn-sm btn">
                                                             <i class="fas fa-eye"></i></i>
                                                         </a>
                                                     <?php } else { ?>
