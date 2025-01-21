@@ -22,7 +22,11 @@
                             <a class="nav-link" href="/data-master/ruangan-tujuan/tujuan.php">Data Ruangan Tujuan</a>
                         </nav>
                     </div>
-                   
+
+                    <!-- <a class="nav-link" href="/transaksi-peminjaman/transaksi.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                        Transaksi
+                    </a> -->
                     <a class="nav-link" href="/transaksi-peminjaman/transaksi.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
                         Transaksi
@@ -36,17 +40,50 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         Data User
                     </a>
-
-                    <a class="nav-link" href="/data-master/data-pasien/pasien.php">
-                        <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
-                        Data Pasien
-                    </a>
-                <?php elseif ($_SESSION["role_id"] == 'admin') : ?>
                     <a class="nav-link" href="/transaksi-peminjaman/transaksi.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
                         Data Transaksi
                     </a>
+                <?php elseif ($_SESSION["role_id"] == 'petugas') : ?>
+                    <a class="nav-link" href="/data-master/data-kategori/kategori.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                        Data Kategori
+                    </a>
+                    <a class="nav-link" href="/data-master/data-barang/barang.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                        Data Barang
+                    </a>
+                    <a class="nav-link" href="/data-master/ruangan-asal/asal.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                        Data Ruangan Asal
+                    </a>
+                    <a class="nav-link" href="/data-master/ruangan-tujuan/tujuan.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                        Data Ruangan Tujuan
+                    </a>
+                    <a class="nav-link" href="/transaksi-peminjaman/transaksi.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                        Data Transaksi
+                    </a>
+                <?php elseif ($_SESSION["role_id"] == 'guru') : ?>
+                    <a class="nav-link" href="/data-master/data-kategori/kategori.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                        Data Kategori
+                    </a>
+                    <a class="nav-link" href="/data-master/data-barang/barang.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                        Data Barang
+                    </a>
+                    <a class="nav-link" href="/data-master/ruangan-asal/asal.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                        Data Ruangan Asal
+                    </a>
+                    <a class="nav-link" href="/data-master/ruangan-tujuan/tujuan.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                        Data Ruangan Tujuan
+                    </a>
                 <?php endif; ?>
+
             </div>
         </div>
     </nav>

@@ -59,7 +59,7 @@ $pecah = $ambil->fetch_assoc();
                                     <div class="form-group row">
                                         <div class="col-sm-4">
                                             <label>Nama Kategori</label>
-                                            <input type="text" class="form-control" name="nama" value="<?php echo $pecah['nama']; ?>">
+                                            <input type="text" class="form-control" name="nama" value="<?php echo $pecah['nama']; ?>" readonly>
                                         </div>
                                     </div>
                                     <!-- <div class="form-group row">

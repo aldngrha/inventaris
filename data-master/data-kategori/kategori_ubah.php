@@ -5,6 +5,9 @@ include '../../koneksi.php';
 if (!isset($_SESSION["role_id"])) {
     echo "<script>location='../../login/index.php'</script>";
     exit();
+} else if ($_SESSION["role_id"] == "guru") {
+    echo "<script>location='/index.php'</script>";
+    exit();
 }
 
 $ambil = $koneksi->query("SELECT * FROM kategori WHERE id_kategori='$_GET[id_kategori]'");
@@ -108,7 +111,7 @@ $pecah = $ambil->fetch_assoc();
                                 <?php
                                 if (isset($_POST['ubah'])) {
                                     $koneksi->query("UPDATE kategori SET nama='$_POST[nama]'
-                                    WHERE id_kategori='$_GET[id_ketegori]'");
+                                    WHERE id_kategori='$_GET[id_kategori]'");
 
                                     echo "<script>alert('Data Kategori Telah Diubah!');</script>";
                                     echo "<script>location='/data-master/data-kategori/kategori.php'</script>";
