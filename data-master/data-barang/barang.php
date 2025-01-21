@@ -68,10 +68,10 @@ if (!isset($_SESSION["role_id"])) {
                                                 <td><?php echo $barang['stok']; ?></td>
                                                 <td><?php echo $barang['kode_barang']; ?></td>
                                                 <td>
-                                                    <a href="/dokter_view.php?&id_dokter=<?php echo $barang['id_barang']; ?>" class="btn-primary btn-sm btn">
+                                                    <a href="/data-master/data-barang/barang_view.php?&id_barang=<?php echo $barang['id_barang']; ?>" class="btn-primary btn-sm btn">
                                                         <i class="fas fa-eye"></i></i>
                                                     </a>
-                                                    <a href="dokter_ubah.php?&id_dokter=<?php echo $pecah['id_dokter']; ?>" class="btn-warning btn-sm btn">
+                                                    <a href="/data-master/data-barang/barang_ubah.php?&id_barang=<?php echo $barang['id_barang']; ?>" class="btn-warning btn-sm btn">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <a href="/data-master/data-barang/barang_hapus.php?&id_barang=<?php echo $barang['id_barang']; ?>" class="btn-danger btn-sm btn">
