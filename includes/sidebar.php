@@ -66,21 +66,21 @@
                         Data Transaksi
                     </a>
                 <?php elseif ($_SESSION["role_id"] == 'guru') : ?>
-                    <a class="nav-link" href="/data-master/data-kategori/kategori.php">
+                    <!-- <a class="nav-link" href="/data-master/data-kategori/kategori.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
                         Data Kategori
-                    </a>
+                    </a> -->
                     <a class="nav-link" href="/data-master/data-barang/barang.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
                         Data Barang
                     </a>
-                    <a class="nav-link" href="/data-master/ruangan-asal/asal.php">
+                    <!-- <a class="nav-link" href="/data-master/ruangan-asal/asal.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
                         Data Ruangan Asal
-                    </a>
-                    <a class="nav-link" href="/data-master/ruangan-tujuan/tujuan.php">
+                    </a> -->
+                    <a class="nav-link" href="/transaksi-peminjaman/transaksi.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
-                        Data Ruangan Tujuan
+                        Transaksi
                     </a>
                 <?php endif; ?>
 
