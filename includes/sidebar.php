@@ -4,7 +4,7 @@
             <div class="nav">
                 <div class="sb-sidenav-menu-heading">Inventaris</div>
                 <a class="nav-link active" href="/index.php">
-                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fas fa-fw fa-home"></i></div>
                     Dashboard
                 </a>
 
@@ -28,7 +28,7 @@
                         Transaksi
                     </a> -->
                     <a class="nav-link" href="/transaksi-peminjaman/transaksi.php">
-                        <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                        <div class="sb-nav-link-icon"><i class="fas fa-fw fa-folder"></i></div>
                         Transaksi
                     </a>
                     <a class="nav-link" href="/data-master/data-user/user.php">
@@ -62,7 +62,7 @@
                         Data Ruangan Tujuan
                     </a>
                     <a class="nav-link" href="/transaksi-peminjaman/transaksi.php">
-                        <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                        <div class="sb-nav-link-icon"><i class="fas fa-fw fa-folder"></i></div>
                         Data Transaksi
                     </a>
                 <?php elseif ($_SESSION["role_id"] == 'guru') : ?>
@@ -79,8 +79,8 @@
                         Data Ruangan Asal
                     </a> -->
                     <a class="nav-link" href="/transaksi-peminjaman/transaksi.php">
-                        <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
-                        Transaksi
+                        <div class="sb-nav-link-icon"><i class="fas fa-fw fa-folder"></i></div>
+                        Transaksi 
                     </a>
                 <?php endif; ?>
 

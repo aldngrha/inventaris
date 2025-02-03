@@ -25,10 +25,10 @@ if (!isset($_SESSION["role_id"])) {
 </head>
 
 <body class="sb-nav-fixed">
-<?php include '../../includes/navbar.php'; ?>
+    <?php include '../../includes/navbar.php'; ?>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-        <?php include '../../includes/sidebar.php'; ?>
+            <?php include '../../includes/sidebar.php'; ?>
         </div>
         <div id="layoutSidenav_content" class="bg-white text-dark">
             <main>
@@ -58,7 +58,7 @@ if (!isset($_SESSION["role_id"])) {
                                     <div class="form-group row">
                                         <div class="col-sm-4">
                                             <label>ID Ruangan</label>
-                                            <input type="text" class="form-control" name="id_ruangan_asal" value="-" required>
+                                            <input type="text" class="form-control" name="id_ruangan_asal" value="-" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -110,16 +110,14 @@ if (!isset($_SESSION["role_id"])) {
 
                                 <?php
                                 if (isset($_POST['save'])) {
-                                    if ($_POST['id_ruangan_asal'] == 0) {
-                                        echo "<script>alert('Pilih Ruangan dengan Benar!');</script>";
-                                    } else {
-                                        $koneksi->query("INSERT INTO ruangan_asal (nama) 
+
+                                    $koneksi->query("INSERT INTO ruangan_asal (nama) 
                                         VALUES ('$_POST[nama]')");
 
-                                        echo "<script>alert('Data Ruangan Tersimpan!');</script>";
-                                        echo "<script>location='/data-master/ruangan-asal/asal.php'</script>";
-                                    }
+                                    echo "<script>alert('Data Ruangan Tersimpan!');</script>";
+                                    echo "<script>location='/data-master/ruangan-asal/asal.php'</script>";
                                 }
+
 
                                 ?>
 

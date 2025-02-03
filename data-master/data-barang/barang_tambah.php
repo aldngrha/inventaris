@@ -94,6 +94,22 @@ if (!isset($_SESSION["role_id"])) {
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-4">
+                                            <label>Ruangan Disimpan</label>
+                                            <select class="custom-select" name="id_ruangan">
+                                                <option value="0" disabled selected>Pilih Ruangan</option>
+                                                <?php
+                                                $ambil2 = $koneksi->query("SELECT * FROM ruangan_asal");
+                                                $pecah2 = $ambil2->fetch_assoc();
+                                                ?>
+
+                                                <?php foreach ($ambil2 as $poli) : ?>
+                                                    <option value="<?php echo $poli['id_ruangan_asal']; ?>"><?php echo $poli['nama']; ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-4">
                                             <label>Stok Barang</label>
                                             <input type="text" class="form-control" name="stok" required>
                                         </div>
@@ -108,9 +124,11 @@ if (!isset($_SESSION["role_id"])) {
                                 if (isset($_POST['save'])) {
                                     if ($_POST['id_kategori'] == 0) {
                                         echo "<script>alert('Kategori Belum Dipilih!');</script>";
+                                    } else if ($_POST['id_ruangan'] == 0) {
+                                        echo "<script>alert('Ruangan Belum Dipilih!');</script>";
                                     } else {
-                                        $koneksi->query("INSERT INTO barang (nama, stok, kode_barang, kategori_id)
-                                        VALUES ('$_POST[nama]', '$_POST[stok]', '$_POST[kode_barang]', '$_POST[id_kategori]')");
+                                        $koneksi->query("INSERT INTO barang (nama, stok, ruangan_asal_id, kode_barang, kategori_id)
+                                        VALUES ('$_POST[nama]', '$_POST[stok]', '$_POST[id_ruangan]', '$_POST[kode_barang]', '$_POST[id_kategori]')");
 
                                         echo "<script>alert('Data Berhasil Tersimpan!');</script>";
                                         echo "<script>location='/data-master/data-barang/barang.php'</script>";
