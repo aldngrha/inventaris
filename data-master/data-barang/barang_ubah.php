@@ -95,6 +95,22 @@ $pecah = $ambil->fetch_assoc();
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-4">
+                                            <label>Ruangan Disimpan</label>
+                                            <select class="custom-select" name="id_ruangan">
+                                                <option value="0" disabled selected>Pilih Ruangan</option>
+                                                <?php
+                                                $ambil2 = $koneksi->query("SELECT * FROM ruangan_asal");
+                                                $pecah2 = $ambil2->fetch_assoc();
+                                                ?>
+
+                                                <?php foreach ($ambil2 as $poli) : ?>
+                                                    <option value="<?php echo $poli['id_ruangan_asal']; ?>"><?php echo $poli['nama']; ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="form-group ">
                                         <button class="btn btn-success font-weight-bold px-3 mr-2" name="ubah"><i class="fas fa-save"></i> Simpan</button>
                                         <a href="/data-master/data-barang/barang.php" class="btn btn-danger font-weight-bold px-3 mr-2"><i class="fas fa-arrow-circle-left"></i> Kembali</a>
@@ -104,7 +120,7 @@ $pecah = $ambil->fetch_assoc();
 
                                 <?php
                                 if (isset($_POST['ubah'])) {
-                                    $koneksi->query("UPDATE barang SET kode_barang='$_POST[kode_barang]', kategori_id='$_POST[id_kategori]', nama='$_POST[nama]', 
+                                    $koneksi->query("UPDATE barang SET kode_barang='$_POST[kode_barang]', kategori_id='$_POST[id_kategori]', id_ruangan_asal='$_POST[id_ruangan]', nama='$_POST[nama]', 
                                         stok='$_POST[stok]', updated_at=NOW()
                                     WHERE id_barang='$_GET[id_barang]'");
 

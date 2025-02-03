@@ -69,13 +69,14 @@ include "../koneksi.php";
           										document.location='../dashboard/index.php'
           								</script>";
 									} else if ($masuk1["role_id"] == '2') {
-										$_SESSION["role_id"] = 'petugas';
+										$_SESSION["role_id"] = 'guru';
+										$_SESSION["user_id"] = $masuk1["id_users"];
 										echo "<script>
 											alert('Anda berhasil Login!')
-												document.location='../dashboard/index.php'
+												document.location='../index.php'
 										</script>";
 									} else if ($masuk1["role_id"] == '3') {
-										$_SESSION["role_id"] = 'guru';
+										$_SESSION["role_id"] = 'petugas';
 										echo "<script>
 											alert('Anda berhasil Login!')
 												document.location='../dashboard/index.php'

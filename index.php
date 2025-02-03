@@ -41,7 +41,7 @@ if (!isset($_SESSION["role_id"])) {
                             <h5 class="card-title"><?php echo $data['kode_barang']; ?> - <?php echo $data['nama_barang']; ?></h5>
                             <p class="card-text"><?php echo $data['nama_kategori']; ?></p>
                             <p class="card-text">Stok: <?php echo $data['stok']; ?></p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <a href="/transaksi-peminjaman/transaksi_tambah.php?id_barang=<?php echo $data['id_barang']; ?>" class="btn btn-primary">Pinjam</a>
                         </div>
                     </div>
                 <?php } ?>
