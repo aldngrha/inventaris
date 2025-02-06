@@ -7,11 +7,14 @@ if (!isset($_SESSION["role_id"])) {
     exit();
 }
 
-$ambil = $koneksi->query("SELECT * FROM transaksi a JOIN tb_pendaftaran b ON a.id_pendaftaran = b.id_pendaftaran
-            JOIN tb_pasien c ON b.id_pasien = c.id_pasien
-            JOIN tb_poli d ON b.id_poli = d.id_poli
-            JOIN tb_dokter e ON b.id_dokter = e.id_dokter WHERE id_pemeriksaan='$_GET[id_pemeriksaan]'");
-$pecah = $ambil->fetch_assoc();
+$ambil = $koneksi->query("SELECT transaksi.status_peminjaman, transaksi.jumlah, transaksi.id_transaksi,
+users.username, ruangan_tujuan.nama
+AS nama_ruangan_tujuan, barang.nama AS nama_barang, transaksi.created_at FROM transaksi
+LEFT JOIN users ON transaksi.user_id = users.id_users
+LEFT JOIN ruangan_tujuan ON transaksi.ruangan_tujuan_id = ruangan_tujuan.id_ruangan
+LEFT JOIN barang ON transaksi.barang_id = barang.id_barang");
+
+$pecah = $ambil->fetch_assoc()
 
 ?>
 
@@ -24,114 +27,101 @@ $pecah = $ambil->fetch_assoc();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Poli Klinik | Data Pemeriksaan</title>
+    <title>Inventaris | Data Transaksi Peminjaman</title>
     <link href="../assets/css/styles.css" rel="stylesheet" />
     <link href="../assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <script src="../assets/js/all.min.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
-<?php include '../includes/navbar.php'; ?>
+    <?php include '../includes/navbar.php'; ?>
 
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-        <?php include '../includes/sidbar.php'; ?>
+            <?php include '../includes/sidebar.php'; ?>
         </div>
-        <div id="layoutSidenav_content" class="bg-white text-dark">
-            <main>
-                <div class="container-fluid">
-                    <h1 class="mt-4">Informasi Pemeriksaan</h1>
-                    <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="../index.php" class="text-decoration-none">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Data Pemeriksaan</li>
-                        <li class="breadcrumb-item active">Info Pemeriksaan</li>
-                    </ol>
-                    <div class="card mb-4">
-                        <div class="card-header mt-1">
-                            <div class="row">
-                                <div class="col-md-9 font-weight-bold">
-                                    Data Pemeriksaan : <?php echo $pecah['kd_pemeriksaan']; ?>
-                                </div>
-                                <div class="col-md-3 font-weight-bold">
-                                    <label class="ml-5">Status : </label>
-                                    <?php if ($pecah['status_periksa'] == 0) { ?>
-                                        <span class="badge badge-danger p-2">Belum Menerima Resep</span>
-                                    <?php } elseif ($pecah['status_periksa'] == 1) { ?>
-                                        <span class="badge badge-success p-2">Sudah Menerima Resep</span>
-                                    <?php } else { ?>
-                                        <span class="badge badge-danger p-2">
-                                            <i class="fas fa-minus"></i>
-                                        </span>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="">
-                                <form class="ml-4" method="post" class="pemeriksaan" enctype="multipart/form-data">
-                                    <div class="form-group row">
-                                        <div class="col-sm-4">
-                                            <label>Kode Pemeriksaan</label>
-                                            <input type="text" class="form-control" name="kd_pemeriksaan" value="<?php echo $pecah['kd_pemeriksaan']; ?>" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-4">
-                                            <label>Nama Pasien</label>
-                                            <input type="text" class="form-control" name="nm_pasien" value="<?php echo $pecah['nm_pasien']; ?>" readonly>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <label>Kode Pendaftaran</label>
-                                            <input type="text" class="form-control" name="kd_pendaftaran" value="<?php echo $pecah['kd_pendaftaran']; ?>" id="kd_pendaftaran" readonly>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <label>Nama Dokter</label>
-                                            <input type="text" class="form-control" name="nm_dokter" value="<?php echo $pecah['nm_dokter']; ?>" id="nm_dokter" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-4">
-
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <label>Poli</label>
-                                            <input type="text" class="form-control" name="nm_poli" value="<?php echo $pecah['nm_poli']; ?>" id="nm_poli" readonly>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <label>Tanggal Daftar</label>
-                                            <input type="date" class="form-control" name="tgl_pendaftaran" value="<?php echo $pecah['tgl_pendaftaran']; ?>" id="tgl_pendaftaran" readonly>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <div class="col-sm-4">
-                                            <label>Keluhan</label>
-                                            <textarea class="form-control" name="keluhan" rows="3" readonly><?php echo $pecah['keluhan']; ?></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-4">
-                                            <label>Diagnosa</label>
-                                            <textarea class="form-control" name="diagnosa" rows="3" readonly><?php echo $pecah['diagnosa']; ?></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-4">
-                                            <label>Tanggal Pemeriksaan</label>
-                                            <input type="date" class="form-control" name="tgl_pemeriksaan" value="<?php echo $pecah['tgl_pemeriksaan']; ?>" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="form-group ">
-                                        <a href="pemeriksaan.php" class="btn btn-danger font-weight-bold px-3 mr-2"><i class="fas fa-arrow-circle-left"></i> Kembali</a>
-                                    </div>
-                                </form>
-
-                            </div>
-                        </div>
+        <div id="layoutSidenav_content" class="bg-white container">
+            <div class="card mt-5 ml-5" style="width: 100%;">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Detail Peminjaman</h5>
+                    <div class="d-flex flex-row">
+                        <p class="mr-2">Tanggal Pinjam</p>
+                        <p class="mr-2"></p>
+                        <p class="card-text"><?php echo $pecah['created_at']; ?></p>
                     </div>
+                    <div class="d-flex flex-row">
+                        <p class="mr-2">Nama Barang</p>
+                        <p class="mr-2"></p>
+                        <p class="card-text"><?php echo $pecah['nama_barang']; ?></p>
+                    </div>
+                    <div class="d-flex flex-row">
+                        <p class="mr-2">Nama Peminjam</p>
+                        <p class="mr-2"></p>
+                        <p class="card-text"><?php echo $pecah['username']; ?></p>
+                    </div>
+                    <div class="d-flex flex-row">
+                        <p class="mr-2">Jumlah</p>
+                        <p class="mr-2"></p>
+                        <p class="card-text"><?php echo $pecah['jumlah']; ?></p>
+                    </div>
+                    <div class="d-flex flex-row">
+                        <p class="mr-2">Ruangan Tujuan</p>
+                        <p class="mr-2"></p>
+                        <p class="card-text"><?php echo $pecah['nama_ruangan_tujuan']; ?></p>
+                    </div>
+                    <td>
+                        <?php if ($pecah['status_peminjaman'] == "ditolak") { ?>
+                            <span class="badge badge-danger p-2">Ditolak</span>
+                        <?php } elseif ($pecah['status_peminjaman'] == "selesai") { ?>
+                            <span class="badge badge-success p-2">Selesai</span>
+                        <?php } elseif ($pecah['status_peminjaman'] == "sedang dipinjam") { ?>
+                            <span class="badge badge-primary p-2">Sedang dipinjam</span>   
+                        <?php } elseif ($pecah['status_peminjaman'] == "hilang") { ?>
+                            <span class="badge badge-danger p-2">Hilang</span> 
+                        <?php } else { ?>
+                            <span class="badge badge-danger p-2">
+                                Menunggu
+                            </span>
+                        <?php } ?>
+                    </td>
                 </div>
-            </main>
+                <?php
+                    if($pecah['status_peminjaman'] == "menunggu") { ?>
+                    <form method="post" enctype="multipart/form-data">
+                        <button class="btn btn-success" name="terima">Terima</button>
+                        <button class="btn btn-danger" name="tolak">Tolak</button>
+                    </form>  
+                   <?php } else if($pecah['status_peminjaman'] == "sedang dipinjam") { ?>
+                    <form method="post" enctype="multipart/form-data">
+                        <button class="btn btn-success" name="selesai">Selesai</button>
+                        <button class="btn btn-danger" name="hilang">Hilang</button>
+                    </form>  
+                    <?php } ?>
+                <?php
+                if (isset($_POST['terima'])) {
+                    $koneksi->query("UPDATE transaksi SET status_peminjaman='sedang dipinjam', update_at=now()
+                      WHERE id_transaksi='$_GET[id_transaksi]'");
+                      echo "<script>alert('Peminjaman Di Terima');</script>";
+                      echo "<script>location='/transaksi-peminjaman/transaksi.php'</script>";
+                } else if(isset($_POST['tolak'])){
+                    $koneksi->query("UPDATE transaksi SET status_peminjaman='ditolak', update_at=now()
+                      WHERE id_transaksi='$_GET[id_transaksi]'");
+                      echo "<script>alert('Peminjaman Di Tolak');</script>";
+                      echo "<script>location='/transaksi-peminjaman/transaksi.php'</script>";
+                } else if(isset($_POST['selesai'])){
+                    $koneksi->query("UPDATE transaksi SET status_peminjaman='selesai', update_at=now()
+                      WHERE id_transaksi='$_GET[id_transaksi]'");
+                      echo "<script>alert('Barang Sudah Dikembalikan');</script>";
+                      echo "<script>location='/transaksi-peminjaman/transaksi.php'</script>";
+                } else if(isset($_POST['hilang'])){
+                    $koneksi->query("UPDATE transaksi SET status_peminjaman='hilang', update_at=now()
+                      WHERE id_transaksi='$_GET[id_transaksi]'");
+                      echo "<script>alert('Peminjaman Di Tolak');</script>";
+                      echo "<script>location='/transaksi-peminjaman/transaksi.php'</script>";
+                }
+                ?>
+            </div>
             <?php include '../includes/footer.php'; ?>
         </div>
     </div>

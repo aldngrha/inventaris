@@ -41,7 +41,7 @@ $barang = $ambil->fetch_assoc();
                 <h5 class="card-title"><?php echo $barang['kode_barang']; ?> - <?php echo $barang['nama_barang']; ?></h5>
                 <p class="card-text"><?php echo $barang['nama_kategori']; ?></p>
                 <p class="card-text">Stok: <?php echo $barang['stok']; ?></p>
-                <p class="card-text">Ruangan Asal: <?php echo $barang['nama_barang']; ?></p>
+                <p class="card-text">Ruangan Asal: <?php echo $barang['nama_ruangan']; ?></p>
 
                 <form class="ml-4" method="post" enctype="multipart/form-data">
                     <div class="form-group row">

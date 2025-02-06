@@ -60,22 +60,20 @@ if (!isset($_SESSION["role_id"])) {
                                         <tr>
                                             <th>Id Transaksi</th>
                                             <th>Tanggal</th>
-                                            <th>Nama User</th>         
+                                            <th>Nama User</th>
                                             <th>Nama Barang</th>
                                             <th>Jumlah Barang</th>
-                                            <th>Ruangan Asal</th>
                                             <th>Ruangan Tujuan</th>
-                                            <th>Aksi</th>
                                             <th>Status</th>
-                                           
+                                            <th>Aksi</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $ambil = $koneksi->query("SELECT transaksi.status, transaksi.jumlah, transaksi.id_transaksi,
-                                            users.username, ruangan_asal.nama AS nama_ruangan_asal, ruangan_tujuan.nama
+                                        <?php $ambil = $koneksi->query("SELECT transaksi.status_peminjaman, transaksi.jumlah, transaksi.id_transaksi,
+                                            users.username, ruangan_tujuan.nama
                                             AS nama_ruangan_tujuan, barang.nama AS nama_barang, transaksi.created_at FROM transaksi
                                             LEFT JOIN users ON transaksi.user_id = users.id_users
-                                            LEFT JOIN ruangan_asal ON transaksi.ruangan_asal_id = ruangan_asal.id_ruangan_asal
                                             LEFT JOIN ruangan_tujuan ON transaksi.ruangan_tujuan_id = ruangan_tujuan.id_ruangan
                                             LEFT JOIN barang ON transaksi.barang_id = barang.id_barang"); ?>
                                         <?php while ($transaksi = $ambil->fetch_assoc()) { ?>
@@ -83,35 +81,28 @@ if (!isset($_SESSION["role_id"])) {
                                                 <td><?php echo $transaksi['id_transaksi']; ?></td>
                                                 <td><?php echo $transaksi['created_at']; ?></td>
                                                 <td><?php echo $transaksi['username']; ?></td>
-                                                <td><?php echo $transaksi['nama_barang']; ?></td>      
+                                                <td><?php echo $transaksi['nama_barang']; ?></td>
                                                 <td><?php echo $transaksi['jumlah']; ?></td>
-                                                <td><?php echo $transaksi['nama_ruangan_asal']; ?></td>
                                                 <td><?php echo $transaksi['nama_ruangan_tujuan']; ?></td>
                                                 <td>
-                                                    <?php if ($transaksi['status'] == "gagal") { ?>
-                                                        <!-- <a href="/transaksi-peminjaman/transaksi_view.php?&id_transaksi=<?php echo $transaksi['id_transaksi']; ?>" class="btn-primary btn-sm btn">
-                                                            <i class="fas fa-eye"></i></i>
-                                                        </a> -->
-                                                    <?php } elseif ($transaksi['status'] == "selesai") { ?>
-                                                        <a href="/transaksi-peminjaman/transaksi_view.php?&id_transaksi=<?php echo $transaksi['id_transaksi']; ?>" class="btn-primary btn-sm btn">
-                                                            <i class="fas fa-eye"></i></i>
-                                                        </a>
+                                                    <?php if ($transaksi['status_peminjaman'] == "ditolak") { ?>
+                                                        <span class="badge badge-danger p-2">Ditolak</span>
+                                                    <?php } elseif ($transaksi['status_peminjaman'] == "selesai") { ?>
+                                                        <span class="badge badge-success p-2">Selesai</span>
+                                                    <?php } elseif ($transaksi['status_peminjaman'] == "sedang dipinjam") { ?>
+                                                        <span class="badge badge-primary p-2">Sedang dipinjam</span>
+                                                    <?php } elseif ($transaksi['status_peminjaman'] == "hilang") { ?>
+                                                        <span class="badge badge-danger p-2">Hilang</span>
                                                     <?php } else { ?>
-                                                        <a href="#" class="btn-secondary btn-sm btn">
-                                                            <i class="fas fa-minus"></i>
-                                                        </a>
+                                                        <span class="badge badge-danger p-2">
+                                                            Menunggu
+                                                        </span>
                                                     <?php } ?>
                                                 </td>
                                                 <td>
-                                                    <?php if ($transaksi['status'] == "gagal") { ?>
-                                                        <span class="badge badge-danger p-2">Gagal</span>
-                                                    <?php } elseif ($transaksi['status'] == "selesai") { ?>
-                                                        <span class="badge badge-success p-2">Selesai</span>
-                                                    <?php } else { ?>
-                                                        <span class="badge badge-danger p-2">
-                                                            <i class="fas fa-minus"></i>
-                                                        </span>
-                                                    <?php } ?>
+                                                    <a href="/transaksi-peminjaman/transaksi_view.php?id_transaksi=<?php echo $transaksi['id_transaksi']; ?>" class="btn-primary btn-sm btn">
+                                                        <i class="fas fa-eye"></i></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         <?php } ?>
