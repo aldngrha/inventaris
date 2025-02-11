@@ -42,7 +42,7 @@ if (!isset($_SESSION["role_id"])) {
                     </ol>
                     <div class="card mb-4">
                         <div class="card-header font-weight-bold">
-                            Data Obat
+                            Data Kategori
                         </div>
                         <div class="card-body">
                             <div class="">
@@ -50,8 +50,8 @@ if (!isset($_SESSION["role_id"])) {
                                     <div class="btn-block disabled mx-4">
                                         <?php $ambil = mysqli_query($koneksi, "SELECT * FROM kategori ORDER BY id_kategori DESC LIMIT 1"); ?>
                                         <?php $data = $ambil->fetch_assoc(); ?>
-                                        <label>Data Terakhir</label>
-                                        <input type="text" class="form-control text-center" value="<?php echo $data['id_kategori'] ?>" readonly>
+                                        <!-- <label>Data Terakhir</label>
+                                        <input type="text" class="form-control text-center" value="<?php echo $data['id_kategori'] ?>" readonly> -->
                                     </div>
                                 </div>
                                 <form class="ml-4" method="post" enctype="multipart/form-data">

@@ -2,7 +2,7 @@
 session_start();
 include '../koneksi.php';
 
-if (!isset($_SESSION["jabatan"])) {
+if (!isset($_SESSION["role_id"])) {
     echo "<script>location='../login/index.php'</script>";
     exit();
 }

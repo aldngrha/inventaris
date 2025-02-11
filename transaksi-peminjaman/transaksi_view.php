@@ -12,7 +12,8 @@ users.username, ruangan_tujuan.nama
 AS nama_ruangan_tujuan, barang.nama AS nama_barang, transaksi.created_at FROM transaksi
 LEFT JOIN users ON transaksi.user_id = users.id_users
 LEFT JOIN ruangan_tujuan ON transaksi.ruangan_tujuan_id = ruangan_tujuan.id_ruangan
-LEFT JOIN barang ON transaksi.barang_id = barang.id_barang");
+LEFT JOIN barang ON transaksi.barang_id = barang.id_barang
+WHERE transaksi.id_transaksi='$_GET[id_transaksi]'");
 
 $pecah = $ambil->fetch_assoc()
 

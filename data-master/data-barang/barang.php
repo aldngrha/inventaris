@@ -21,7 +21,7 @@ if (!isset($_SESSION["role_id"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Poli Klinik | Data Master - Dokter</title>
+    <title> | Data Master - Barang</title>
     <link href="../../assets/css/styles.css" rel="stylesheet" />
     <link href="../../assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <script src="../../assets/js/all.min.js"></script>
@@ -90,6 +90,7 @@ if (!isset($_SESSION["role_id"])) {
                         </div>
                         <div class="card-footer">
                             <a href="/data-master/data-barang/barang_tambah.php" class="btn-success btn px-3 font-weight-bold"><i class="fas fa-plus "></i> Tambah Data Barang</a>
+                            <a href="/data-master/data-barang/cetak_barang.php" class="btn text-white" style="background-color: #1b5fae;"><i class="fas fa-print"></i>Cetak Barang</a>
                         </div>
                     </div>
                 </div>
