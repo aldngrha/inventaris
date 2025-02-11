@@ -71,18 +71,31 @@ $barang = $ambil->fetch_assoc();
                 </form>
                 <?php
                 if (isset($_POST['pinjam'])) {
+                    // Validasi jika ruangan tujuan tidak dipilih
                     if ($_POST['id_ruangan'] == 0) {
                         echo "<script>alert('Barang Tujuan Belum Dipilih!');</script>";
                     } else {
-                        $koneksi->query("INSERT INTO transaksi (barang_id, user_id, status_peminjaman, jumlah, ruangan_tujuan_id, created_at)
-                                        VALUES ('$barang[id_barang]', '$_SESSION[user_id]', 'menunggu', '$_POST[jumlah]', '$_POST[id_ruangan]', now())");
+                        $jumlah_pinjam = $_POST['jumlah'];
 
-                        echo "<script>alert('Data Mengajukan Peminjaman!');</script>";
-                        echo "<script>location='/index.php'</script>";
+                        // Cek jika stok mencukupi
+                        if ($barang['stok'] >= $jumlah_pinjam) {
+                            // Masukkan data transaksi
+                            $koneksi->query("INSERT INTO transaksi (barang_id, user_id, status_peminjaman, jumlah, ruangan_tujuan_id, created_at)
+                                            VALUES ('$barang[id_barang]', '$_SESSION[user_id]', 'menunggu', '$jumlah_pinjam', '$_POST[id_ruangan]', now())");
+
+                            // Kurangi stok barang yang dipinjam
+                            $new_stok = $barang['stok'] - $jumlah_pinjam;
+                            $koneksi->query("UPDATE barang SET stok = '$new_stok' WHERE id_barang = '$barang[id_barang]'");
+
+                            echo "<script>alert('Berhasil Mengajukan Peminjaman!');</script>";
+                            echo "<script>location='/index.php'</script>";
+                        } else {
+                            echo "<script>alert('Stok barang tidak mencukupi!');</script>";
+                        }
                     }
                 }
-
                 ?>
+
             </div>
         </div>
         <script src="../../assets/js/jquery-3.5.1.slim.min.js"></script>

@@ -53,8 +53,8 @@ if (!isset($_SESSION["role_id"])) {
                                     <div class="btn-block disabled mx-4">
                                         <?php $ambil = mysqli_query($koneksi, "SELECT * FROM barang ORDER BY id_barang DESC LIMIT 1"); ?>
                                         <?php $data = $ambil->fetch_assoc(); ?>
-                                        <label>Data Terakhir</label>
-                                        <input type="text" class="form-control text-center" value="<?php echo $data['id_barang'] ?>" readonly>
+                                        <!-- <label>Data Terakhir</label>
+                                        <input type="text" class="form-control text-center" value="<?php echo $data['id_barang'] ?>" readonly> -->
                                     </div>
                                 </div>
                                 <form class="ml-4" method="post" enctype="multipart/form-data">
